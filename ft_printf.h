@@ -21,8 +21,6 @@ int		ft_putchar(char c);
 int		ft_printchar(va_list arg);
 int		ft_printinteger(va_list arg);
 int		ft_printstring(va_list arg);
-int		ft_putnbr_hexalower(unsigned int nb);
-int		ft_putnbr_hexaupper(unsigned int nb);
 int		ft_printhexalower(va_list arg);
 int		ft_printhexaupper(va_list arg);
 int		ft_printunsint(va_list arg);

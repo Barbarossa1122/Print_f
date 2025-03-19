@@ -12,14 +12,35 @@
 
 #include "ft_printf.h"
 
+static int	ft_put_ptr(unsigned long nb)
+{
+	char	*hexa;
+	int		output;
+
+	hexa = "0123456789abcdef";
+	output = 0;
+	if (nb == 0)
+	{
+		write(1, "(nil)", 5);
+		return (5);
+	}
+	if (nb >= 16)
+		output += ft_put_ptr(nb / 16);
+	output += write(1, &hexa[nb % 16], 1);
+	return (output);
+}
+
 int	ft_printptr(va_list arg)
 {
 	unsigned long	nbr;
-	int				ptr;
 
 	nbr = va_arg(arg, unsigned long);
-	ft_putchar('0');
-	ft_putchar('x');
-	ptr = ft_putnbr_hexalower(nbr);
-	return (ptr + 2);
+	if (nbr == 0)
+		return (ft_put_ptr(nbr));
+	else
+	{
+		ft_putchar('0');
+		ft_putchar('x');
+		return (ft_put_ptr(nbr) + 2);
+	}
 }

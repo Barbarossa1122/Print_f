@@ -11,49 +11,37 @@
 # **************************************************************************** #
 
 NAME = libftprintf.a
-
-CC = gcc
-CFLAGS = -Wall -Werror -Wextra
+CC = cc
+CFLAGS = -Wall -Wextra -Werror
 RM = rm -f
-AR = ar rcs
 
-FILES = ft_printchar \
-		ft_printf \
-		ft_printhexalower \
-		ft_printhexaupper \
-		ft_printinteger \
-		ft_printpercent \
-		ft_printptr \
-		ft_printstring \
-		ft_printunsignedint \
-		ft_putchar \
-		ft_putnbr_hexalower \
-		ft_putnbr_hexaupper \
-		ft_putnbr \
-		ft_putstr \
-		ft_strlen \
-		
+SRCS = ft_printchar.c \
+		ft_printf.c \
+		ft_printhexalower.c \
+		ft_printhexaupper.c \
+		ft_printinteger.c \
+		ft_printpercent.c \
+		ft_printptr.c \
+		ft_printstring.c \
+		ft_printunsignedint.c \
+		ft_putchar.c \
+		ft_putnbr.c \
+		ft_putstr.c \
+		ft_strlen.c \
 
-SRCS_DIR = ./
-SRCS = $(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))
-
-OBJS_DIR = ./
-OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))	
-
-.c.o: $(SOURCES)
-	$(CC) $(CFLAGS) -c -o $@ $<
-
-$(NAME): $(OBJS)
-	$(AR) $@ $^
+OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
+
+$(NAME): $(OBJS)
+	$(AR) rcs $(NAME) $(OBJS)
 
 clean:
 	$(RM) $(OBJS)
 
 fclean: clean
 	$(RM) $(NAME)
-	
-re: clean all
 
-.PHONY: bonus all clean fclean re
+re: fclean all
+
+.PHONY: all clean fclean re

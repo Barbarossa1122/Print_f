@@ -12,24 +12,22 @@
 
 #include "ft_printf.h"
 
-int	ft_countnums(int nb)
+static int	ft_putnbr_unsigned(unsigned int nb)
 {
-	int	count;
+	char	*hexa;
+	int		output;
 
-	count = 0;
-	if (nb < 0)
-	{
-		count++;
-		nb *= -1;
-	}
+	hexa = "0123456789";
+	output = 0;
 	if (nb == 0)
-		count++;
-	while (nb > 0)
 	{
-		count++;
-		nb = nb / 10;
+		output += write(1, "0", 1);
+		return (output);
 	}
-	return (count);
+	if (nb >= 10)
+		output += ft_putnbr_unsigned(nb / 10);
+	output += write(1, &hexa[nb % 10], 1);
+	return (output);
 }
 
 int	ft_printunsint(va_list arg)
@@ -37,18 +35,5 @@ int	ft_printunsint(va_list arg)
 	unsigned int	nb;
 
 	nb = va_arg(arg, unsigned int);
-	if (nb < 0)
-	{
-		nb += 4294967297;
-	}
-	if (nb >= 10)
-	{
-		ft_putnbr(nb / 10);
-		ft_putnbr(nb % 10);
-	}
-	else if (nb <= 9)
-	{
-		ft_putchar(nb + 48);
-	}
-	return (ft_countnums(nb));
+	return (ft_putnbr_unsigned(nb));
 }
