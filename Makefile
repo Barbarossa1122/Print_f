@@ -24,10 +24,7 @@ SRCS = ft_printchar.c \
 		ft_printptr.c \
 		ft_printstring.c \
 		ft_printunsignedint.c \
-		ft_putchar.c \
-		ft_putnbr.c \
-		ft_putstr.c \
-		ft_strlen.c \
+		ft_utils_printf.c \
 
 OBJS = $(SRCS:.c=.o)
 
